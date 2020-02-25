@@ -144,17 +144,17 @@ df.drop(columns = ['What is the gross weigh?'])
 df['brand'] = df['Brand']
 df['model'] = df['Model ']
 # df['model_engine'] = df['Model Engine ']
-df['description']
+# df['description']
 # df['title']
 df['model_engine'] = df['Modification (Engine) '].str.split(' \(', n = 1, expand = True)[0]
 df['production_start'] = df['Start of production '].str.split(' ', n = 1, expand = True)[0][0]
 df['production_end'] = df['End of production '].str.split(' ', n = 1, expand = True)[0][0]
-df[['brand', 'model', 'model_engine', 'production_start', 'production_end']]
+# df[['brand', 'model', 'model_engine', 'production_start', 'production_end']]
 
 # Metric columns
-df[['drive', 'compression', 'bore_mm', 'displacement_cm3', 'displacement_in', 'consumption_l100', 'consumption_mpg',
-    'topspeed_kmh', '0-60_mph', 'cylinders', 'cylinder_orientation', 'gears', 'max_speed_mph', 'valves_per_cylinder',
-    'stroke_mm', 'peak_hp', 'peak_hp_rpm', 'weight_lbs']]
+# df[['drive', 'compression', 'bore_mm', 'displacement_cm3', 'displacement_in', 'consumption_l100', 'consumption_mpg',
+#     'topspeed_kmh', '0-60_mph', 'cylinders', 'cylinder_orientation', 'gears', 'max_speed_mph', 'valves_per_cylinder',
+#     'stroke_mm', 'peak_hp', 'peak_hp_rpm', 'weight_lbs']]
 
 
 df['power_to_weight'] = df['power_hp'] / df['weight_lbs']
@@ -182,20 +182,18 @@ params = np.array([1,1])
 def funcinv(x, a, b):
     return b+ a/x
 
-def residuals(params, x, data):
-    a, b = params
-    func_eval = funcinv(x, a, b)
-    return(data - func_eval)
+# def residuals(params, x, data):
+#     a, b = params
+#     func_eval = funcinv(x, a, b)
+#     return(data - func_eval)
+#
+# res = least_squares(residuals, params, args = (xData,yData))
 
-res = least_squares(residuals, params, args = (xData,yData))
+fittedParameters, pcov = curve_fit(funcinv, xData, yData)
 
-fittedParameters, pcov = curve_fit(funcinv, xData, yData, params)
-
-res2 = curve_fit(funcinv, xData, yData, params)
+res2 = curve_fit(funcinv, xData, yData, params) # the params arg is not necessary here, not sure why it is included
 
 print(res2)
-
-
 
 def ModelAndScatterPlot(graphWidth, graphHeight):
     f = plt.figure(figsize=(graphWidth/100.0, graphHeight/100.0), dpi=100)
@@ -205,7 +203,7 @@ def ModelAndScatterPlot(graphWidth, graphHeight):
     axes.plot(xData, yData,  'D')
 
     # create data for the fitted equation plot
-    xModel = np.linspace(min(xData), max(xData))
+    xModel = np.linspace(min(xData), max(xData)) # creates an array from the first arg to the second, default num = 50
     yModel = funcinv(xModel, *fittedParameters)
 
     # now the model as a line plot
@@ -215,7 +213,7 @@ def ModelAndScatterPlot(graphWidth, graphHeight):
     axes.set_ylabel('0-60 mph') # Y axis data label
 
     plt.show()
-    plt.close('all') # clean up after using pyplot
+    # plt.close('all') # clean up after using pyplot
 
 graphWidth = 800
 graphHeight = 600
