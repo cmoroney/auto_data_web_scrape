@@ -1,0 +1,14 @@
+setuptools~=60.2.0
+pip~=21.3.1
+wheel~=0.37.1
+requests~=2.28.1
+pandas~=1.4.3
+beautifulsoup4~=4.11.1
+numpy~=1.23.1
+soupsieve~=2.3.2.post1
+pytz~=2022.1
+python-dateutil~=2.8.2
+certifi~=2022.6.15
+idna~=3.3
+six~=1.16.0
+urllib3~=1.26.11
