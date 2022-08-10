@@ -1,6 +1,7 @@
-df <- read_csv('auto_data_cleaned.csv')
 library(tidyverse)
 library(forcats)
+
+df <- read_csv('auto_data_cleaned.csv')
 
 df %>% 
   mutate(body_type = factor(body_type)) %>%

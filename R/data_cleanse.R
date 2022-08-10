@@ -1,7 +1,14 @@
 library(tidyverse)
 library(magrittr)
 
-raw_data <- read_csv('full_data_raw.csv') %>%
+get_raw_data <- function(){
+  setwd("../")
+  df <- read_csv(paste0(getwd(), "/python/full_data_raw.csv"))
+  setwd(paste0(getwd(), "/R"))
+  return(df)
+}
+
+raw_data <- get_raw_data() %>%
   janitor::clean_names()
 
 raw_data %>% select(-colnames(raw_data[colSums(is.na(raw_data))==nrow(raw_data)]))
