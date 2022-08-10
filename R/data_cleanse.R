@@ -242,7 +242,7 @@ mutate(front_tire_width = tire_code_parse(front_tires, "width"),
 df_clean <- cbind(df_clean, temp)
 
 # Calculate metric to imperial etc.
-df$curb_weight_lb <- round(df$curb_weight_kg * 2.20462, 1)
+df_clean$curb_weight_lb <- round(df_clean$curb_weight_kg * 2.20462, 1)
 
 # TODO - valvetrain
 # df_narm %>% mutate(valvetrain_new = case_when(str_detect(valvetrain, 'dohc|DOHC') ~ 'DOHC',
